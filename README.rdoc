@@ -1,6 +1,59 @@
 = precssious
 
-Description goes here.
+This is just a hack to allow me to write nested CSS. I had trouble finding 
+a CSS preprocessor that actually allowed nested styles without breaking my 
+stylesheets.
+
+Although I am under no illusions of the general applicability of this code
+(the current implementation is very naïve), it appears to do OK with how I 
+write CSS.
+
+See spec/snippets.rb for a quick list of the features it supports.
+
+
+== On performance / configuration
+
+It's probably not a good idea to serve stylesheets using precssious under
+normal conditions. However, caching them in development can be a real drag.
+I've used the following approach.
+
+(1) I add a precssious dependency, and make sure it isn't loaded by default.
+
+/config/environment.rb
+
+  config.gem 'precssious', :lib => false
+
+(2) I add an initializer with the following code, to load precssious in 
+development:
+
+/config/initializers/precssious.rb
+
+  if RAILS_ENV == 'development'
+    require 'precssious'
+    Precssious.start_rails_controller
+  end
+
+This catches requests to "/stylesheets/xxx/xxx.css", and serves the content 
+of all stylesheets in that directory, merged into a single file. The web path 
+("stylesheets") and the source directory ("public/stylesheets") can both be 
+configured.
+
+(3) For production, I don't want Precssious loaded at all -- instead, I
+generate the stylesheets on deploy:
+
+/lib/tasks/precssious.rake
+
+  desc 'Generates the stylesheets as static resources'
+  task :precssious do
+    require 'precssious'
+    Precssious.perform_preprocessing
+  end
+
+/config/deploy.rb
+
+  after "deploy:update_code" do
+    run "cd #{current_path} && rake precssious"
+  end
 
 == Note on Patches/Pull Requests
  
