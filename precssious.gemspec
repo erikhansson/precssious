@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Erik Hansson"]
-  s.date = %q{2009-08-21}
+  s.date = %q{2009-08-22}
   s.default_executable = %q{precssious}
   s.description = %q{}
   s.email = %q{erik@bits2life.com}
@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
      "lib/precssious/rule.rb",
      "lib/precssious/token.rb",
      "lib/precssious/value.rb",
+     "precssious.gemspec",
      "spec/precssious_spec.rb",
      "spec/spec_helper.rb"
   ]
@@ -41,7 +42,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.1}
-  s.summary = %q{Utility for merging CSS-files, allowing nested declaration}
+  s.summary = %q{Merges CSS files and allows nested declarations}
   s.test_files = [
     "spec/precssious_spec.rb",
      "spec/spec_helper.rb"
