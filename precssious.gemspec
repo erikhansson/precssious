@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Erik Hansson"]
-  s.date = %q{2009-08-22}
+  s.date = %q{2009-09-09}
   s.default_executable = %q{precssious}
   s.description = %q{}
   s.email = %q{erik@bits2life.com}
@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
      "lib/precssious/rule.rb",
      "lib/precssious/token.rb",
      "lib/precssious/value.rb",
+     "lib/tasks/precssious.rb",
      "precssious.gemspec",
      "spec/precssious_spec.rb",
      "spec/spec_helper.rb"

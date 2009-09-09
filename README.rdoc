@@ -39,25 +39,16 @@ of all stylesheets in that directory, merged into a single file. The web path
 configured.
 
 (3) For production, I don't want Precssious loaded at all -- instead, I
-generate the stylesheets on deploy:
-
-/lib/tasks/precssious.rake
-
-  desc 'Generates the stylesheets as static resources'
-  task :precssious => :environment do
-    require 'precssious'
-    Precssious.directory = Rails.root.join('public', 'stylesheets')
-    Precssious.perform_preprocessing
-  end
+generate the stylesheets on deploy. Require 'tasks/precssious' from within
+your Rakefile to make the task available, and then add something like the 
+following to /config/deploy.rb
 
 /config/deploy.rb
 
   after "deploy:update_code" do
-    run "cd #{current_path} && rake precssious"
+    run "cd #{current_path} && rake precssious:generate"
   end
 
-Precssious.directory defaults to public/stylesheets in the application directory,
-but can be set to any directory holding "precssious directories".
 
 == Note on Patches/Pull Requests
  
