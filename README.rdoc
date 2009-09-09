@@ -44,8 +44,9 @@ generate the stylesheets on deploy:
 /lib/tasks/precssious.rake
 
   desc 'Generates the stylesheets as static resources'
-  task :precssious do
+  task :precssious => :environment do
     require 'precssious'
+    Precssious.directory = Rails.root.join('public', 'stylesheets')
     Precssious.perform_preprocessing
   end
 
@@ -54,6 +55,9 @@ generate the stylesheets on deploy:
   after "deploy:update_code" do
     run "cd #{current_path} && rake precssious"
   end
+
+Precssious.directory defaults to public/stylesheets in the application directory,
+but can be set to any directory holding "precssious directories".
 
 == Note on Patches/Pull Requests
  

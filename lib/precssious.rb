@@ -34,6 +34,7 @@ module Precssious
   #
   def self.perform_preprocessing
     yield self if block_given?
+    @directory ||= Rails.root.join('public', 'stylesheets') if defined?(Rails)
     
     Dir["#{@directory}/*"].each do |dir|
       if File.directory?(dir)
